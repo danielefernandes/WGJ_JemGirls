@@ -10,23 +10,37 @@ public class MenuManager : MonoBehaviour
     public Button buttonStart;
     [SerializeField]
     public Button buttonExit;
+    [SerializeField]
+    public Animator transition;
+    private float transitionTime = 3f;
+
     // Start is called before the first frame update
     void Start()
     {
+        
         Button buttonS = buttonStart.GetComponent<Button>();
-        buttonS.onClick.AddListener(StartLevel1); 
+        buttonS.onClick.AddListener(StartLevel); 
 
         Button buttonE = buttonExit.GetComponent<Button>();
         buttonE.onClick.AddListener(EndGame);
     }
 
-    private void StartLevel1(){
-		SceneManager.LoadScene("Rooms");
+    private void StartLevel(){
+		StartCoroutine(LoadLevel("Rooms"));
 	}
+
+    private IEnumerator LoadLevel(string levelName)
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene(levelName);
+    }
 
     // Update is called once per frame
     private void EndGame()
     {
         Application.Quit();
     }
+
+    
 }

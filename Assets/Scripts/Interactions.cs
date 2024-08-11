@@ -27,16 +27,16 @@ public class Interactions : MonoBehaviour
             }
         }
         
-        activateRoom("Room1");
+        activateRoom("Scene1");
     }
 
     private void OnButtonClick(Button clickedButton)
     {
         if(clickedButton.name == "Room1Desk"){
-            activateRoom("Room2");
+            activateRoom("Scene2");
         }
         if(clickedButton.name == "Room2Exit"){
-            activateRoom("Room1");
+            activateRoom("Scene1");
         }
         
     }
