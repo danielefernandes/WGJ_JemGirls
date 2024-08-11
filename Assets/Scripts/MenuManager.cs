@@ -12,7 +12,11 @@ public class MenuManager : MonoBehaviour
     public Button buttonExit;
     [SerializeField]
     public Animator transition;
-    private float transitionTime = 3f;
+    [SerializeField]
+    public GameObject transitionEffect;
+
+    private float transitionTime = 2f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -26,14 +30,19 @@ public class MenuManager : MonoBehaviour
     }
 
     private void StartLevel(){
-		StartCoroutine(LoadLevel("Rooms"));
+		StartCoroutine(LoadLevel("CutScene"));
 	}
 
     private IEnumerator LoadLevel(string levelName)
     {
-        transition.SetTrigger("Start");
+        //transition.SetTrigger("Start");
+        if (transitionEffect != null)
+        {
+            transitionEffect.SetActive(true);
+        }
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(levelName);
+        
     }
 
     // Update is called once per frame
